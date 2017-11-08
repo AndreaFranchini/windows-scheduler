@@ -1,18 +1,35 @@
 {
   "name": "windows-scheduler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nodejs wrapper for native windows schtasks command",
   "main": "task.js",
+  "directories": {
+    "test": "test",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "mocha test/test.js"
+  },  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreaFranchini/windows-scheduler.git"
+  },
+  "keywords": [
+    "windows",
+    "scheduler",
+    "task",
+    "schtasks"
+  ],
   "dependencies": {
     "chai": "^4.1.2",
     "child_process": "^1.0.2",
     "mocha": "^4.0.1",
     "moment": "^2.19.1"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "mocha test/test.js"
+  "author": "Andrea Franchini <andrea.franchini.93@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AndreaFranchini/windows-scheduler/issues"
   },
-  "author": "Andrea Franchini",
-  "license": "MIT"
+  "homepage": "https://github.com/AndreaFranchini/windows-scheduler#readme"
 }

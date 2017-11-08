@@ -59,11 +59,11 @@ module.exports = {
 				if (schedule.modifier)  command = command.concat(` /MO ${schedule.modifier}`)
 				if (schedule.day)       command = command.concat(` /D  ${schedule.day}`)
 				if (schedule.month)     command = command.concat(` /M  ${schedule.month}`)
-				if (schedule.starttime) command = commnad.concat(` /ST ${schedule.starttime}`)
-				if (schedule.endtime)   command = commnad.concat(` /ET ${schedule.endtime}`)
-				if (schedule.every)     command = commnad.concat(` /RI ${schedule.every}`) 
-				if (schedule.startdate) command = commnad.concat(` /SD ${schedule.startdate}`)
-				if (schedule.enddate)   command = commnad.concat(` /ED ${schedule.enddate}`)
+				if (schedule.starttime) command = command.concat(` /ST ${schedule.starttime}`)
+				if (schedule.endtime)   command = command.concat(` /ET ${schedule.endtime}`)
+				if (schedule.every)     command = command.concat(` /RI ${schedule.every}`) 
+				if (schedule.startdate) command = command.concat(` /SD ${schedule.startdate}`)
+				if (schedule.enddate)   command = command.concat(` /ED ${schedule.enddate}`)
 
 				try {
 					const result = exec(command)
