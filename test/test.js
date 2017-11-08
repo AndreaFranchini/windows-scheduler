@@ -54,13 +54,60 @@ describe('Task', function(){
 			})
 		})
 		it('Throw trying to create with incorrect options combination', function(done){
-			task.create('newtest', 'run.exe', {frequency: 'MINUTE', starttime: '12:00'})
+			task.create('newtest', 'run.exe', {frequency: 'MINUTE', every: 5})
 			.then( () => {})
 			.catch( (err) => {
 				done()
 			})
 		})
 
+		describe('Complex schedule', function(){
+
+			it('every minute during business hours starting from 17th November 2017', async function(){
+				await task.create('test', 'run.exe', 
+				    { 
+				        frequency: 'MINUTE',
+				        starttime: '09:00',
+				        endtime: '18:00',
+				        startdate: '17/11/2017'
+				    })
+				await task.delete('test')
+			})
+
+			it('every 12 days at 13:00 beginning on 31th December 2017', async function(){
+				await task.create('test', 'run.exe', 
+				    { 
+				        frequency: 'DAILY',
+				        modifier: 12,
+				        startdate: '31/12/2017',
+				        starttime: '13:00'
+				    })
+				await task.delete('test')
+			})
+
+			it('every 15 minute during business hours of every 10th of every month', async function(){
+				await task.create('test', 'run.exe', 
+				    { 
+				        frequency: 'MONTHLY',
+				        every: 15,
+				        day: 10,
+				        starttime: '09:00',
+				        endtime: '18:00'
+				    })
+				await task.delete('test')
+			})
+
+			it('at midnight on mondays of every other week', async function(){
+				await task.create('test', 'run.exe', 
+				    { 
+				        frequency: 'WEEKLY',
+				        modifier: 2,
+				        day: 'MON',
+				        starttime: '00:00'
+				    })
+				await task.delete('test')
+			})
+		})
 	})
 
 	describe('get()', function(){

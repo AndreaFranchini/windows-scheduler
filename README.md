@@ -6,17 +6,17 @@ More info [msdn.microsoft.com/Schtasks.exe](https://msdn.microsoft.com/en-us/lib
 
 ## Usage
 
-### Install
+#### Install
 ```javascript
     npm i windows-scheduler
 ```
 
-### Test
+#### Test
 ```javascript
     \some\dir\windows-scheduler\ npm test
 ```
 
-### Examples
+#### Examples
 ```javascript
 const task = require('windows-scheduler')
 
@@ -40,6 +40,46 @@ task.create('test-task', 'path/to/task.exe', { frequency: 'WEEKLY' })
 })()
 ```
 
+#### Schedule examples
+```javascript
+// every minute during business hours starting from 17th November 2017
+await task.create('test', 'run.exe', 
+    { 
+        frequency: 'MINUTE',
+        starttime: '09:00',
+        endtime: '18:00',
+        startdate: '17/11/2017'
+    })
+
+// every 12 days at 13:00 beginning on 31th December 2017
+await task.create('test', 'run.exe', 
+    { 
+        frequency: 'DAILY',
+        modifier: 12,
+        startdate: '31/12/2017',
+        starttime: '13:00'
+    })
+
+// every 15 minute during business hours of every 10th of every month
+await task.create('test', 'run.exe', 
+    { 
+        frequency: 'MONTHLY',
+        every: 15,
+        day: 10,
+        starttime: '09:00',
+        endtime: '18:00'
+    })
+
+// at midnight on mondays of every other week 
+await task.create('test', 'run.exe', 
+    { 
+        frequency: 'WEEKLY',
+        modifier: 2,
+        day: 'MON',
+        starttime: '00:00'
+    })
+```
+
 ## Create
 Schedule a new task.
 ```javascript
@@ -52,19 +92,20 @@ params {
     schedule : {
         frequency : '<string> (required) allowed [MINUTE, HOURLY, DAILY, WEEKLY, MONTHLY]',
         modifier :  '<number> allowed [1439, 23, 365, 52, 12]',
-        day :       '<string> allowed [*, MON, TUE, WED, THU, FRI, SAT, SUN]',
+        day :       '<string/number> allowed [*, MON, TUE, WED, THU, FRI, SAT, SUN]',
         month :     '<string> allowed [*, JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC]',
         starttime : '<string> format HH:mm',
         endtime :   '<string> format HH:mm',
         every :     '<number> 1 <= every <=599940',
-        startdate : '<string> format MM/DD/YYYY',
-        enddate :   '<string> format MM/DD/YYYY'
+        startdate : '<string> format DD/MM/YYYY',
+        enddate :   '<string> format DD/MM/YYYY'
     }
 }
 ```
 Older version of windows can't use params 'every' and 'endtime'.  
 The param 'modifier' refines the schedule type to allow for finer control over the schedule recurrence.  
 The param 'every' specifies the repetition interval in minutes.
+The param 'day' is a number for 'MONTHLY' frequency, otherwise is 3-letters coded.
 
 ## Get
 Show one or more scheduled task.
@@ -94,8 +135,8 @@ params {
         starttime : '<string> format HH:mm',
         endtime :   '<string> format HH:mm',
         every :     '<number> 1 <= every <=599940',
-        startdate : '<string> format MM/DD/YYYY',
-        enddate :   '<string> format MM/DD/YYYY'
+        startdate : '<string> format DD/MM/YYYY',
+        enddate :   '<string> format DD/MM/YYYY'
     },
     enable :  '<boolean>'
 }
