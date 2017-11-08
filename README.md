@@ -104,7 +104,7 @@ params {
 ```
 Older version of windows can't use params 'every' and 'endtime'.  
 The param 'modifier' refines the schedule type to allow for finer control over the schedule recurrence.  
-The param 'every' specifies the repetition interval in minutes.
+The param 'every' specifies the repetition interval in minutes.  
 The param 'day' is a number for 'MONTHLY' frequency, otherwise is 3-letters coded.
 
 ## Get
