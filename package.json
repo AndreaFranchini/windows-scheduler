@@ -23,7 +23,7 @@
   "dependencies": {
     "chai": "^4.1.2",
     "child_process": "^1.0.2",
-    "mocha": "^4.0.1",
+    "mocha": "^10.2.0",
     "moment": "^2.19.1"
   },
   "author": "Andrea Franchini <andrea.franchini.93@gmail.com>",
